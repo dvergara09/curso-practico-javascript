@@ -7,24 +7,51 @@ function calcularPrecioConDescuento(precio, descuento) {
   return precioConDescuento
 }
 
-/* console.log({
-  precioOriginal,
-  descuento,
-  porcentajePrecioConDescuento,
-  precioConDescuento
-}) */
+const coupons = [
+  {
+    name: 'Cupon 1',
+    discount: 15
+  },
+  {
+    name: 'Cupon 2',
+    discount: 30
+  },
+  {
+    name: 'Cupon 3',
+    discount: 50
+  }
+]
 
 function priceDiscount() {
   const inputPrice = document.getElementById('inputPrice')
-  const priceValue = parseInt(inputPrice.value)
+  const priceValue = inputPrice.value
   const inputDiscount = document.getElementById('inputDiscount')
-  const discountValue = parseInt(inputDiscount.value)
+  const discountValue = inputDiscount.value
+  const inputCoupon = document.getElementById('inputCoupon')
+  const couponValue = inputCoupon.value
+  let descuentoTotal = 0
 
-  const precioConDescuento = calcularPrecioConDescuento(
-    priceValue,
-    discountValue
-  )
+  if (priceValue === '') {
+    alert('El precio no puede ser vacio')
+  } else {
+    const couponUser = coupons.find(
+      (element) => element.discount === parseInt(couponValue)
+    )
 
-  const resultP = document.getElementById('resultP')
-  resultP.innerText = `El precio con descuento es $${precioConDescuento}`
+    if (couponUser !== undefined) {
+      descuentoTotal += couponUser.discount
+    }
+
+    if (discountValue !== '') {
+      descuentoTotal += parseInt(discountValue)
+    }
+
+    const precioConDescuento = calcularPrecioConDescuento(
+      priceValue,
+      descuentoTotal
+    )
+
+    const resultP = document.getElementById('resultP')
+    resultP.innerText = `El precio con descuento es $${precioConDescuento}`
+  }
 }
