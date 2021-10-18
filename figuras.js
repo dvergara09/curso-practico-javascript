@@ -23,6 +23,10 @@ function perimetroTriangulo(lado1, lado2, base) {
 function areaTriangulo(base, altura) {
   return (base * altura) / 2
 }
+
+function alturaIsosceles(lado, base) {
+  return Math.sqrt(lado * lado - (base * base) / 4)
+}
 console.groupEnd()
 
 //circulos
@@ -86,6 +90,24 @@ function calcularAreaTriangulo() {
 
   const areaT = areaTriangulo(valueBase, valueAltura)
   document.getElementById('resultadoTriangulo').innerHTML = areaT
+}
+
+function calcularAlturaIsosceles() {
+  const lado1 = document.getElementById('lado1')
+  const value1 = parseInt(lado1.value)
+
+  const lado2 = document.getElementById('lado2')
+  const value2 = parseInt(lado2.value)
+
+  const base = document.getElementById('base')
+  const valueBase = parseInt(base.value)
+
+  if (value1 === value2 && value1 !== valueBase && value2 !== valueBase) {
+    const alturaI = alturaIsosceles(value1, valueBase)
+    document.getElementById('resultadoTriangulo').innerHTML = alturaI
+  } else {
+    document.getElementById('resultadoTriangulo').innerHTML = 'No es Isosceles'
+  }
 }
 
 function calcularPerimetroCirculo() {
